@@ -162,6 +162,8 @@ Spritpreis_Set(@) {
             #
             # default behaviour if no ID or "all" is given is to update all existing IDs
             #
+            # removing the timer so we don't get a flurry of requests
+            RemoveInternalTimer($hash);
             Spritpreis_Tankerkoenig_updateAll($hash); 
             return "update all (default) called for $hash->{NAME}"; #reload page
         }
@@ -253,30 +255,30 @@ Spritpreis_Set(@) {
                 for ( keys %{ $hash->{READINGS} } ) {
                     if(substr($_,0,$indx) eq $prefix){
                         Log3($hash,5, "delete $_");
-						delete $hash->{READINGS}->{$_};
+                        delete $hash->{READINGS}->{$_};
                         $cnt++;
                     }
                 }
-#$DB::single = 1; #break in debugger				
-				# look for the station id in attr IDs and remove that from the attr
-				my $attrIDs=AttrVal($hash->{'NAME'}, "IDs",'');
-				Log3($hash,5,"delete: read attr IDs=".$attrIDs);
-				if($attrIDs ne ''){
-					$indx=index $attrIDs, $theID;
-					if($indx != -1){
-						my @listIDs=split(",", $attrIDs);
-						my $newList="";
-						foreach (@listIDs){
-							if ($_ ne $theID){
-								Log3($hash,5,"found id $theID in attr, remove ...");
-								$newList.=$_.",";
-							}
-							$newList=substr($newList,0,-1);
-							$attr{$name}{IDs}=$newList;
-							Log3($hash,5,"newList is $newList");
-						}
-					}
-				}
+#$DB::single = 1; #break in debugger                
+                # look for the station id in attr IDs and remove that from the attr
+                my $attrIDs=AttrVal($hash->{'NAME'}, "IDs",'');
+                Log3($hash,5,"delete: read attr IDs=".$attrIDs);
+                if($attrIDs ne ''){
+                    $indx=index $attrIDs, $theID;
+                    if($indx != -1){
+                        my @listIDs=split(",", $attrIDs);
+                        my $newList="";
+                        foreach (@listIDs){
+                            if ($_ ne $theID){
+                                Log3($hash,5,"found id $theID in attr, remove ...");
+                                $newList.=$_.",";
+                            }
+                            $newList=substr($newList,0,-1);
+                            $attr{$name}{IDs}=$newList;
+                            Log3($hash,5,"newList is $newList");
+                        }
+                    }
+                }
                 my $ret="deleted $cnt readings starting with $prefix";
                 return "$hash->{NAME} => $ret";
             }else{
@@ -348,7 +350,7 @@ Spritpreis_Get(@) {
           my ($lat1, $lon1, $str1)=@loc;
           return "location for address: $lat1, $lon1, $str1";
         }
-		else{
+        else{
             #use attr values for lat, lon, rad
             $lat=AttrVal($hash->{'NAME'}, "lat",'');
             $lon=AttrVal($hash->{'NAME'}, "lon",'');
@@ -359,8 +361,8 @@ Spritpreis_Get(@) {
               $ret=Spritpreis_Tankerkoenig_GetStationIDsForLocation($hash, @loc);
               return $ret;
             }
-			return "unable to search for '$str'";
-		}
+            return "unable to search for '$str'";
+        }
     }elsif($cmd eq "test"){ # this will test the current station IDs and get the details
             $ret=Spritpreis_Tankerkoenig_populateStationsFromAttr($hash);
             return $ret;
@@ -412,6 +414,8 @@ sub
 Spritpreis_updateAll(@){
     my ($hash)=@_;
     if($hash->{helper}->{service} eq "Tankerkoenig"){
+        # removing the timer so we don't get a flurry of requests
+        RemoveInternalTimer($hash);
         Spritpreis_Tankerkoenig_updateAll();
     }elsif($hash->{helper}->{service} eq "Spritpreisrechner"){
     }
@@ -505,7 +509,7 @@ Spritpreis_Tankerkoenig_updateAll(@){
     # it does this in blocks of 10 as suggested by the Tankerkoenig API
     #
     my ($hash) = @_;
-    Log3($hash,4, "$hash->{NAME}: called Spritpreis_Tankerkoenig_updateAll ");
+    Log3($hash,3, "$hash->{NAME}: called Spritpreis_Tankerkoenig_updateAll ");
     my $i=1;
     my $j=0;
     my $id;
@@ -694,16 +698,16 @@ Spritpreis_Tankerkoenig_GetStationIDsForLocation(@){
               return $ret;
             }
             my ($stations) = $result->{stations};
-			my $stationlist=""; # store stations with id, brand, name, place
+            my $stationlist=""; # store stations with id, brand, name, place
             #my $ret="<html><p><h3>Stations for Address</h3></p><p><h2>$formattedAddress</h2></p><table><tr><td>id</td><td>Name</td><td>Ort</td><td>Straße</td></tr>";
             my $ret="<html><header><meta charset='UTF-8'></header><body><p><h3>Stations for Address</h3></p><p><h2>$lat $lng $rad</h2></p>";
-			$ret.="<table><tr>";
-			$ret.="<td>id</td>";
-			$ret.="<td>brand</td>";
-			$ret.="<td>Name</td>";
-			$ret.="<td>Ort</td>";
-			$ret.="<td>Stra&szlig;e</td>";
-			$ret.="</tr>";
+            $ret.="<table><tr>";
+            $ret.="<td>id</td>";
+            $ret.="<td>brand</td>";
+            $ret.="<td>Name</td>";
+            $ret.="<td>Ort</td>";
+            $ret.="<td>Stra&szlig;e</td>";
+            $ret.="</tr>";
             foreach (@{$stations}){
                 (my $station)=$_;
 #fhem?cmd=set+%3Ca%20href=%27/fhem?detail=BenzinPreise%27%3EBenzinPreise%3C/a%3E+add+id+1b52f84f-03cc-457c-bf76-dcbe5fd3eb33
@@ -714,12 +718,12 @@ Spritpreis_Tankerkoenig_GetStationIDsForLocation(@){
                 Log3($hash, 2, "Name: $station->{name}, id: $station->{id}");
                 $ret.="<tr><td>" . $station->{id} . "</td>";
                 $ret.="<td>".$station->{brand} . "</td>";
-				$ret.="<td>".$station->{name} . "</td>";
-				$ret.="<td>".$station->{place} . "</td>";
-				$ret.="<td>".$station->{street} . "</td>";
-				$ret.="</tr>";
-				$stationlist.= $station->{id} . $station->{brand}."\n";
-				$stationlist.=$station->{place}." ".$station->{street}." ".$station->{houseNumber}."\n";
+                $ret.="<td>".$station->{name} . "</td>";
+                $ret.="<td>".$station->{place} . "</td>";
+                $ret.="<td>".$station->{street} . "</td>";
+                $ret.="</tr>";
+                $stationlist.= $station->{id} . $station->{brand}."\n";
+                $stationlist.=$station->{place}." ".$station->{street}." ".$station->{houseNumber}."\n";
             }
             $ret=$ret . "</table></body></html>";
 =pod
@@ -731,20 +735,20 @@ Spritpreis_Tankerkoenig_GetStationIDsForLocation(@){
                 #Log3($hash, 5, "$hash->{NAME}: Station hash:".Dumper($station));
                 Log3($hash, 2, "Name: $station->{name}, id: $station->{id}");
                 $ret=$ret."<option value=".$station->{id}.">".$station->{name}." ".$station->{place}." ".$station->{street}." ".$station->{houseNumber}."</option>";
-				$stationlist.=$station->{id}." ";
-				$stationlist.=$station->{brand}."\n";
-				$stationlist.=$station->{place}." ".$station->{street}." ".$station->{houseNumber}."\n";
+                $stationlist.=$station->{id}." ";
+                $stationlist.=$station->{brand}."\n";
+                $stationlist.=$station->{place}." ".$station->{street}." ".$station->{houseNumber}."\n";
             }
             $ret=$ret."<button type='submit'>submit</button></html>";
 ##### end html form
 =cut
             my $utf8 = encode("utf-8", $ret);
             Log3($hash,2,"$hash->{NAME}: ############# ret: $utf8");
-			#update reading stations_found
+            #update reading stations_found
 =pod
-			readingsBeginUpdate($hash);
-			readingsBulkUpdate($hash,"stations_found", encode("utf-8", $stationlist));
-			readingsEndUpdate($hash,1);
+            readingsBeginUpdate($hash);
+            readingsBulkUpdate($hash,"stations_found", encode("utf-8", $stationlist));
+            readingsEndUpdate($hash,1);
 =cut
             return $utf8;
         }         
@@ -830,7 +834,7 @@ GetStationIDsForLocation_callback(@){
                 $ret=$ret . $station->{name} . "</td><td>" . $station->{place} . "</td><td>" . $station->{street} . " " . $station->{houseNumber} . "</td></tr>";
             }
             $ret=$ret . "</table></body></html>";
-			
+            
             my $utf8 = encode("utf-8", $ret);
             Log3($hash,2,"$hash->{NAME}: ############# ret: $utf8");
             #return $utf8; #this will not show a new dialog as we are in a callback
@@ -899,9 +903,20 @@ Spritpreis_Tankerkoenig_ParseDetailsForID(@){
         Log3($hash, 5, "$hash->{NAME}: got data $data\n\n\n");
 
         eval { $result = JSON->new->utf8(1)->decode($data); };
+        # In jedem Aufruf einer API-Methode muss ein API-Key mit angegeben werden.
+        # Die Antwort enthält immer ein ok flag, dessen Status abgefragt werden sollte. Im Fehlerfall (ok == false) enthält die Antwort einen Text mit der Fehlerursache, bspw:
+
+        #{
+        #  "ok":false,
+        #  "message":"parameter error"
+        #}
+
         if ($@) {
             Log3 ($hash, 4, "$hash->{NAME}: error decoding response $@");
         } else {
+            Log3 ($hash, 4, "$hash->{NAME}: response $@");
+            my $isOK=$result->{ok};
+            Log3 ($hash, 4, "$hash->{NAME}: ok $isOK");
             my $i=0;
             my $station = $result->{station};
             while(ReadingsVal($hash->{NAME},$i."_id",$station->{id}) ne $station->{id}) 
@@ -920,12 +935,12 @@ Spritpreis_Tankerkoenig_ParseDetailsForID(@){
             foreach my $type (@types){
                 Log3($hash,4,"$hash->{NAME}: checking type $type");
                 if(defined($station->{$type})){
-				
-					if(AttrVal($hash->{NAME}, "priceformat","") eq "2dezCut"){
-						chop($station->{$type});
-					}elsif(AttrVal($hash->{NAME}, "priceformat","") eq "2dezRound"){
-						$station->{$type}=sprintf("%.2f", $station->{$type});
-					}
+                
+                    if(AttrVal($hash->{NAME}, "priceformat","") eq "2dezCut"){
+                        chop($station->{$type});
+                    }elsif(AttrVal($hash->{NAME}, "priceformat","") eq "2dezRound"){
+                        $station->{$type}=sprintf("%.2f", $station->{$type});
+                    }
                     if(ReadingsVal($hash->{NAME}, $i."_".$type."_trend","") ne ""){
                         #read old price
                         my $p=ReadingsVal($hash->{NAME}, $i."_".$type."_price",0);
@@ -982,6 +997,15 @@ Spritpreis_Tankerkoenig_ParsePricesForIDs(@){
         if ($@) {
             Log3 ($hash, 4, "$hash->{NAME}: error decoding response $@");
         } else {
+            my $isOK=$result->{ok};
+            Log3($hash, 5, "tankerkoenik API result ok? = $isOK");
+            # 'true' will be 1
+            if ($isOK){
+                Log3($hash, 5, "tankerkoenik API result ist ok? = $isOK");
+            }
+            else{
+                my $apiMsg=$result->{message};
+            }
             my ($stations) = $result->{prices};
             Log3($hash, 5, "$hash->{NAME}: stations:".Dumper($stations));
             #
@@ -1001,12 +1025,12 @@ Spritpreis_Tankerkoenig_ParsePricesForIDs(@){
                     foreach my $type (@types){
                         Log3($hash, 4, "$hash->{NAME} ParsePricesForIDs checking type $type");
                         if(defined($stations->{$id}->{$type})){
-						
-							if(AttrVal($hash->{NAME}, "priceformat","") eq "2dezCut"){
-								chop($stations->{$id}->{$type});
-							}elsif(AttrVal($hash->{NAME}, "priceformat","") eq "2dezRound"){
-								$stations->{$id}->{$type}=sprintf("%.2f", $stations->{$id}->{$type});
-							}
+                        
+                            if(AttrVal($hash->{NAME}, "priceformat","") eq "2dezCut"){
+                                chop($stations->{$id}->{$type});
+                            }elsif(AttrVal($hash->{NAME}, "priceformat","") eq "2dezRound"){
+                                $stations->{$id}->{$type}=sprintf("%.2f", $stations->{$id}->{$type});
+                            }
                             Log3($hash, 4, "$hash->{NAME} ParsePricesForIDs updating type $type");
                             #if(ReadingsVal($hash->{NAME}, $i."_".$type."_trend","") ne ""){
                                 my $p=ReadingsVal($hash->{NAME}, $i."_".$type."_price",0);
