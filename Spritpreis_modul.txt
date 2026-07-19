@@ -1,0 +1,142 @@
+define BenzinPreise Spritpreis Tankerkoenig 3f1788aa-240e-b74c-22ea-bd126a1c49f1
+setuuid BenzinPreise 5e1f51fe-f33f-467e-8973-ba63accfe2b21646
+attr BenzinPreise IDs 51d4b60f-a095-1aa0-e100-80009459e03a,fa6624d4-7bb9-4b17-9e56-31e0040428d1,fddc6475-0b35-4304-bced-19e357764a0e,8185ea97-8557-491d-a650-0f3be18029fc,005056ba-7cb6-1ed2-bceb-57ae133b0d16
+attr BenzinPreise interval 15
+attr BenzinPreise priceformat 2dezCut
+attr BenzinPreise room Benzinpreise
+
+https://creativecommons.tankerkoenig.de/TankstellenFinder/index.html
+
+https://creativecommons.tankerkoenig.de/json/prices.php?ids=51d4b60f-a095-1aa0-e100-80009459e03a,fa6624d4-7bb9-4b17-9e56-31e0040428d1,fddc6475-0b35-4304-bced-19e357764a0e,8185ea97-8557-491d-a650-0f3be18029fc,005056ba-7cb6-1ed2-bceb-57ae133b0d16&apikey=3f1788aa-240e-b74c-22ea-bd126a1c49f1
+
+https://creativecommons.tankerkoenig.de/json/prices.php?ids=51d4b60f-a095-1aa0-e100-80009459e03a,fa6624d4-7bb9-4b17-9e56-31e0040428d1,fddc6475-0b35-4304-bced-19e357764a0e,8185ea97-8557-491d-a650-0f3be18029fc,005056ba-7cb6-1ed2-bceb-57ae133b0d16&apikey=3f1788aa-240e-b74c-22ea-bd126a1c49f1
+
+51d4b60f-a095-1aa0-e100-80009459e03a, OK x
+fa6624d4-7bb9-4b17-9e56-31e0040428d1, OK x
+fddc6475-0b35-4304-bced-19e357764a0e, OK x
+8185ea97-8557-491d-a650-0f3be18029fc, OK x
+005056ba-7cb6-1ed2-bceb-57ae133b0d16  OK
+
+ok	true
+license	"CC BY 4.0 -  https://creativecommons.tankerkoenig.de"
+data	"MTS-K"
+prices	
+8185ea97-8557-491d-a650-0f3be18029fc	
+status	"closed"
+fa6624d4-7bb9-4b17-9e56-31e0040428d1	
+status	"open"
+e5	1.469
+e10	1.449
+diesel	1.329
+fddc6475-0b35-4304-bced-19e357764a0e	
+status	"open"
+e5	1.399
+e10	1.399
+diesel	1.269
+51d4b60f-a095-1aa0-e100-80009459e03a	
+status	"open"
+e5	1.379
+e10	1.379
+diesel	1.239
+005056ba-7cb6-1ed2-bceb-57ae133b0d16	
+status	"closed"
+
+[
+  {
+    "id": "005056ba-7cb6-1ed2-bceb-57ae133b0d16",
+    "name": "star Tankstelle",
+    "brand": "STAR",
+    "street": "Friedensstrasse",
+    "house_number": "30 - 34",
+    "post_code": 41236,
+    "place": "Mönchengladbach",
+    "lat": 51.16605,
+    "lng": 6.45493,
+    "isOpen": true
+  }
+]
+
+https://creativecommons.tankerkoenig.de/json/prices.php?ids=005056ba-7cb6-1ed2-bceb-57ae133b0d16&apikey=3f1788aa-240e-b74c-22ea-bd126a1c49f1
+
+
+define BenzinPreise Spritpreis Tankerkoenig 3f1788aa-240e-b74c-22ea-bd126a1c49f1
+setuuid BenzinPreise 5e1f01c2-f33f-cd4a-1821-e5a30d24f76683a9
+attr BenzinPreise IDs 51d4b60f-a095-1aa0-e100-80009459e03a,fa6624d4-7bb9-4b17-9e56-31e0040428d1,8185ea97-8557-491d-a650-0f3be18029fc,fddc6475-0b35-4304-bced-19e357764a0e
+attr BenzinPreise apikey 3f1788aa-240e-b74c-22ea-bd126a1c49f1
+attr BenzinPreise interval 15
+attr BenzinPreise priceformat 2dezCut
+attr BenzinPreise room Benzinpreis
+attr BenzinPreise verbose 5
+
+
+
+2020.01.15 14:02:29 4: https://creativecommons.tankerkoenig.de/json/detail.php?id=8185ea97-8557-491d-a650-0f3be18029fc&apikey=3f1788aa-240e-b74c-22ea-bd126a1c49f1: HTTP response code 200
+2020.01.15 14:02:29 5: HttpUtils https://creativecommons.tankerkoenig.de/json/detail.php?id=8185ea97-8557-491d-a650-0f3be18029fc&apikey=3f1788aa-240e-b74c-22ea-bd126a1c49f1: Got data, length: 604
+2020.01.15 14:02:29 5: HttpUtils response header:
+HTTP/1.1 200 OK
+Server: nginx/1.10.3 (Ubuntu)
+Date: Wed, 15 Jan 2020 13:02:29 GMT
+Content-Type: application/json; charset=utf-8
+Connection: close
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: origin, x-requested-with, content-type, accept
+Access-Control-Allow-Methods: GET
+2020.01.15 14:02:29 4: BenzinPreise: got StationDetail reply
+2020.01.15 14:02:29 5: BenzinPreise: got data {"ok":true,"license":"CC BY 4.0 -  https:\/\/creativecommons.tankerkoenig.de","data":"MTS-K","status":"ok","station":{"id":"8185ea97-8557-491d-a650-0f3be18029fc","name":"Juechen, Neusser Str.","brand":"SB","street":"Neusser Str.. 2","houseNumber":"","postCode":41363,"place":"Juechen","openingTimes":[{"text":"Mo-Fr","start":"06:00:00","end":"22:00:00"},{"text":"Samstag","start":"07:00:00","end":"22:00:00"},{"text":"Sonntag, Feiertag","start":"08:00:00","end":"22:00:00"}],"overrides":[],"wholeDay":false,"isOpen":true,"e5":1.429,"e10":1.429,"diesel":1.319,"lat":51.098841,"lng":6.510981,"state":null}}
+
+
+
+2020.01.15 14:02:29 4: BenzinPreise: checking type e5
+2020.01.15 14:02:29 4: BenzinPreise: checking type e10
+2020.01.15 14:02:29 4: BenzinPreise: checking type diesel
+2020.01.15 14:02:29 5: Starting notify loop for BenzinPreise, 8 event(s), first is 2_name: Juechen, Neusser Str.
+2020.01.15 14:02:29 5: End notify loop for BenzinPreise
+
+######################################
+2020.01.15 13:58:15 4: https://creativecommons.tankerkoenig.de/json/detail.php?id=&apikey=3f1788aa-240e-b74c-22ea-bd126a1c49f1: HTTP response code 200
+2020.01.15 13:58:15 5: HttpUtils https://creativecommons.tankerkoenig.de/json/detail.php?id=&apikey=3f1788aa-240e-b74c-22ea-bd126a1c49f1: Got data, length: 57
+2020.01.15 13:58:15 5: HttpUtils response header:
+HTTP/1.1 200 OK
+Server: nginx/1.10.3 (Ubuntu)
+Date: Wed, 15 Jan 2020 12:58:14 GMT
+Content-Type: application/json; charset=utf-8
+Connection: close
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: origin, x-requested-with, content-type, accept
+Access-Control-Allow-Methods: GET
+2020.01.15 13:58:15 4: BenzinPreise: got StationDetail reply
+2020.01.15 13:58:15 5: BenzinPreise: got data {"status":"error","ok":false,"message":"parameter error"}
+
+
+
+2020.01.15 13:58:15 4: BenzinPreise: checking type e5
+2020.01.15 13:58:15 4: BenzinPreise: checking type e10
+2020.01.15 13:58:15 4: BenzinPreise: checking type diesel
+2020.01.15 13:58:15 5: Starting notify loop for BenzinPreise, 1 event(s), first is 4_street:
+2020.01.15 13:58:15 5: End notify loop for BenzinPreise
+
+#################################
+for set test idxyz
+
+2020.01.15 13:58:15 4: https://creativecommons.tankerkoenig.de/json/detail.php?id=&apikey=3f1788aa-240e-b74c-22ea-bd126a1c49f1: HTTP response code 200
+2020.01.15 13:58:15 5: HttpUtils https://creativecommons.tankerkoenig.de/json/detail.php?id=&apikey=3f1788aa-240e-b74c-22ea-bd126a1c49f1: Got data, length: 57
+2020.01.15 13:58:15 5: HttpUtils response header:
+HTTP/1.1 200 OK
+Server: nginx/1.10.3 (Ubuntu)
+Date: Wed, 15 Jan 2020 12:58:14 GMT
+Content-Type: application/json; charset=utf-8
+Connection: close
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Headers: origin, x-requested-with, content-type, accept
+Access-Control-Allow-Methods: GET
+2020.01.15 13:58:15 4: BenzinPreise: got StationDetail reply
+2020.01.15 13:58:15 5: BenzinPreise: got data {"status":"error","ok":false,"message":"parameter error"}
+
+
+
+2020.01.15 13:58:15 4: BenzinPreise: checking type e5
+2020.01.15 13:58:15 4: BenzinPreise: checking type e10
+2020.01.15 13:58:15 4: BenzinPreise: checking type diesel
+2020.01.15 13:58:15 5: Starting notify loop for BenzinPreise, 1 event(s), first is 4_street:
+2020.01.15 13:58:15 5: End notify loop for BenzinPreise
+

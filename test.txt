@@ -1,0 +1,90 @@
+https://creativecommons.tankerkoenig.de/
+
+82ac17f9-7f01-4385-bdaf-b93df6541d64,51d4b4c6-a095-1aa0-e100-80009459e03a,fddc6475-0b35-4304-bced-19e357764a0e,8185ea97-8557-491d-a650-0f3be18029fc,005056ba-7cb6-1ed2-bceb-57ae133b0d16
+
+Giesenkirchen:
+51.155340
+6.492030
+
+Umkreisabfrage:
+https://creativecommons.tankerkoenig.de/json/list.php?lat=51.155340&lng=6.492030&rad=10&sort=dist&type=all&apikey=00000000-0000-0000-0000-000000000002
+
+
+            "id": "51d4b4c6-a095-1aa0-e100-80009459e03a",
+            "name": "Supermarkt-Tankstelle MOENCHENGLADBACH OTTOSTR. 3-5",
+            "brand": "Supermarkt-Tankstelle",
+            "street": "OTTOSTR. 3-5",
+            "place": "MOENCHENGLADBACH",
+            "lat": 51.16442,
+            "lng": 6.46029,
+            "dist": 2.4,
+            "diesel": 1.009,
+            "e5": 1.009,
+            "e10": 1.009,
+            "isOpen": true,
+            "houseNumber": "",
+            "postCode": 41238
+
+Preise:
+
+https://creativecommons.tankerkoenig.de/json/prices.php?ids=82ac17f9-7f01-4385-bdaf-b93df6541d64&apikey=3f1788aa-240e-b74c-22ea-bd126a1c49f1
+
+
+https://creativecommons.tankerkoenig.de/json/prices.php?ids=51d4b4c6-a095-1aa0-e100-80009459e03a&apikey=4d93bdac-9982-6df2-fb1d-42b6c6cdf238
+
+{
+  "ok": true,
+  "license": "CC BY 4.0 -  https://creativecommons.tankerkoenig.de",
+  "data": "MTS-K",
+  "prices": {
+    "51d4b4c6-a095-1aa0-e100-80009459e03a": {
+      "status": "open",
+      "e5": 1.539,
+      "e10": 1.479,
+      "diesel": 1.299
+    }
+  }
+}
+
+
+Details:
+https://creativecommons.tankerkoenig.de/json/detail.php?id=82ac17f9-7f01-4385-bdaf-b93df6541d64&apikey=3f1788aa-240e-b74c-22ea-bd126a1c49f1
+
+https://creativecommons.tankerkoenig.de/json/detail.php?id=51d4b4c6-a095-1aa0-e100-80009459e03a&apikey=4d93bdac-9982-6df2-fb1d-42b6c6cdf238
+
+{
+  "ok": true,
+  "license": "CC BY 4.0 -  https://creativecommons.tankerkoenig.de",
+  "data": "MTS-K",
+  "status": "ok",
+  "station": {
+    "id": "51d4b4c6-a095-1aa0-e100-80009459e03a",
+    "name": "Supermarkt-Tankstelle MOENCHENGLADBACH OTTOSTR. 3-5",
+    "brand": "Supermarkt-Tankstelle",
+    "street": "OTTOSTR. 3-5",
+    "houseNumber": null,
+    "postCode": 41238,
+    "place": "MOENCHENGLADBACH",
+    "openingTimes": [
+      {
+        "text": "Mo-Fr",
+        "start": "07:30:00",
+        "end": "19:30:00"
+      },
+      {
+        "text": "Samstag",
+        "start": "07:30:00",
+        "end": "17:30:00"
+      }
+    ],
+    "overrides": [],
+    "wholeDay": false,
+    "isOpen": true,
+    "e5": 1.539,
+    "e10": 1.479,
+    "diesel": 1.299,
+    "lat": 51.16442,
+    "lng": 6.46029,
+    "state": null
+  }
+}
